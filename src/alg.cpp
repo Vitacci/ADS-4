@@ -25,7 +25,7 @@ int countPairs2(int *arr, int len, int value) {
   return cnt2;
 }
 
-int binar(int* arr; int len; int value) {
+int binar(int* arr, int len, int value) {
   int cntbin = 0;
   int index1 = 0;
   int index2 = len - 1;
@@ -44,10 +44,11 @@ int binar(int* arr; int len; int value) {
         r += 1;
       }
       return cntbin;
-    } else if (arr[center] < value)
+    } else if (arr[center] < value) {
       index1 = center + 1;
-    else
+    } else {
       index2 = center - 1;
+    }
 }
 return 0;
 }

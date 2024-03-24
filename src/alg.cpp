@@ -25,38 +25,27 @@ int countPairs2(int *arr, int len, int value) {
   return cnt2;
 }
 
-int binar(int* arr, int len, int value) {
-  int cntbin = 0;
-  int index1 = 0;
-  int index2 = len - 1;
-  while (index1 <= index2) {
-    int center = index1 + (index2 - index1) / 2;
-    if (arr[center] == value) {
-      cntbin += 1;
-      int l = center - 1;
-      while (l >= 0 && arr[l] == value) {
-        cntbin += 1;
-        l -= 1;
-      }
-      int r = center + 1;
-      while (r < len && arr[r] == value) {
-        cntbin += 1;
-        r += 1;
-      }
-      return cntbin;
-    } else if (arr[center] < value) {
-      index1 = center + 1;
-    } else {
-      index2 = center - 1;
-    }
-}
-return 0;
-}
-
 int countPairs3(int *arr, int len, int value) {
   int cnt3 = 0;
   for (int i = 0; i < len; i++) {
-    cnt3 += binar(&arr[i + 1], len - i - 1, value - arr[i]);
+    int l = i;
+    int r = len;
+    while (l < r - 1) {
+      int centre = (r + l) / 2;
+      if (arr[i] + arr[centre] == value) {
+        cnt3 += 1;
+        int temp = centre - 1;
+        while ((arr[i] + arr[temp] == value) && (temp > l)) {
+          cnt3++;
+          temp--;
+        }
+        break;
+      } else if (arr[i] + arr[centre] > value) {
+        r = centre;
+      } else {
+        l = centre;
+      }
+    }
   }
   return cnt3;
 }
